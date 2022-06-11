@@ -3,18 +3,21 @@
 #include <string.h>
 #include <stdlib.h>
 #include <time.h>
+#include <Windows.h>
 
 void Create();   // Nhap DS
 void ViewPoint();  // Xem diem SV
 void FixPoint(); // Sua diem SV
 void PrList();  // In danh sach SV
 void ArrList(); // Sap xep danh sach SV
+void processing();
 
 int CheckID(long long x);  // Kiem tra ma sv
 void ReadF();  // Doc file
 void delay(int number_of_seconds);
 void PrLine(); // Ngan dong
-
+void TitStart();
+void TitEnd();
 int n;
 struct sv{
    long long msv;
@@ -22,54 +25,44 @@ struct sv{
    float TB;
    char diemchu[3];
 } ds[50];
+
 FILE *ac,*ad;
 char j[1001],k[1001],ap[1001];
-void TitStart()
-{
-    printf("\t\t*************************************************************************************************\n");
-    printf("\t\t|                             PBL1: HE THONG QUAN LY DIEM CUA SINH VIEN                          |\n");
-    printf("\t\t|                          Nguoi thuc hien: Le Van Tien Dat & La Dang Huy                        |\n");
-    printf("\t\t|                             Giao vien huong dan: Tran Ho Thuy Tien                             |\n");
-    printf("\t\t*************************************************************************************************\n");
-}
 
-void TitEnd()
-{
-    printf("\n\t\t*************************************************************************************************\n");
-    printf("\t\t|                    ^-^  Cam on moi nguoi da su dung he thong cua chung toi ^-^                |\n");
-    printf("\t\t*                              Chuc moi nguoi mot ngay moi tot lanh !!!                         *\n");
-    printf("\t\t|                            -.-.-.-.-.-.-.-.-.-.-.-..-.-.-.-.-.-.-.-.-.-                       |\n");
-    printf("\t\t*************************************************************************************************\n");
-}
 int main(){
+    SetConsoleTitle("Project");
     TitStart();
+    processing();
+    PrLine();
+    printf("\tHe thong da thoat !!!");
+    TitEnd();
+    return 0;
+}
+void processing(){
     int select,in;
-    long long msv;
-    printf("                                            Moi ban dang nhap vao he thong: "); scanf("%d", &in);
-    printf("\n\t\t");
-    // delay of one second
+    printf("\tMoi ban dang nhap vao he thong: "); scanf("%d", &in);
     delay(2);
     while(in == 1){
     //PrLine();
-    printf("\n\t\t-------------------------------------------------------------------------------------------------\n");
-    printf("\t        |  1. Nhap diem\t\t\t\t\t\t\t\t\t\t        |\n\t\t|  2. Xem diem\t\t\t\t\t\t\t\t\t\t        |\n\t\t|  3. Sua diem\t\t\t\t\t\t\t\t\t\t        |\n\t\t|  4. In danh sach\t\t\t\t\t\t\t\t\t        |\n\t\t|  5. Sap xep\t\t\t\t\t\t\t\t\t\t        |\n\t\t|  0. Thoat\t\t\t\t\t\t\t\t\t\t        |");
-    printf("\n\t\t-------------------------------------------------------------------------------------------------\n");
-    printf("\t                                    Chon chuc nang: ");
+    printf("\n\t-----------------------------------------------------------------------------------------------------------\n");
+    printf("\t|  1. Nhap diem\t\t\t\t\t\t\t\t\t\t                  |\n\t|  2. Xem diem\t\t\t\t\t\t\t\t\t\t                  |\n\t|  3. Sua diem\t\t\t\t\t\t\t\t\t\t                  |\n\t|  4. In danh sach\t\t\t\t\t\t\t\t\t                  |\n\t|  5. Sap xep\t\t\t\t\t\t\t\t\t\t                  |\n\t|  0. Thoat\t\t\t\t\t\t\t\t\t\t                  |");
+    printf("\n\t-----------------------------------------------------------------------------------------------------------\n");
+    printf("\tChon chuc nang: ");
     scanf("%d",&select);
     switch (select){
         case 1:
             //ham tao file
-            printf("\t                                    Nhap ten mon hoc: ");
+            printf("\tNhap ten mon hoc: ");
             scanf("%s", &j);
             strcat(j,"_");
-            printf("\t                                    Nhap ten lop ( nhom lop ): ");
+            printf("\tNhap ten lop ( nhom lop ): ");
             scanf("%s", &k);
             strcat(k,".txt");
             strcat(j,k);
             ac= fopen(j,"w");
-            printf("\t                                    File %s da duoc tao\n ",j);
+            printf("\tFile %s da duoc tao\n ",j);
             if(ac == NULL){
-            printf("\t                                    Error !!!");
+            printf("\tError !!!");
             exit(1);
                }
             else
@@ -80,17 +73,17 @@ int main(){
             fclose(ac);break;
 
          case 2:
-            printf("\t                                    Nhap ten mon hoc: ");
+            printf("\tNhap ten mon hoc: ");
             scanf("%s", &j);
             strcat(j,"_");
-            printf("\t                                    Nhap ten lop ( nhom lop ): ");
+            printf("\tNhap ten lop ( nhom lop ): ");
             scanf("%s", &k);
             strcat(k,".txt");
             strcat(j,k);
             ac= fopen(j,"r");
             if(ac == NULL)
             {
-                printf("\t                                    Error !");
+                printf("\tError !");
                 exit(1);
             }else{
                 PrLine();
@@ -100,17 +93,17 @@ int main(){
             fclose(ac);break;
 
          case 3:
-            printf("\t                                    Nhap ten mon hoc: ");
+            printf("\tNhap ten mon hoc: ");
             scanf("%s", &j);
             strcat(j,"_");
-            printf("\t                                    Nhap ten lop ( nhom lop ): ");
+            printf("\tNhap ten lop ( nhom lop ): ");
             scanf("%s", &k);
             strcat(k,".txt");
             strcat(j,k);
             ac= fopen(j,"r");
             if(ac == NULL)
             {
-                printf("\t                                    Error !!!");
+                printf("\tError !!!");
                 exit(1);
             }else{
                 PrLine();
@@ -120,11 +113,11 @@ int main(){
             fclose(ac);break;
 
          case 4:
-            printf("\t                                    Nhap ten mon hoc: ");
+            printf("\tNhap ten mon hoc: ");
             scanf("%s", &j);
             strcpy(ap,j);
             strcat(j,"_");
-            printf("\t                                    Nhap ten lop ( nhom lop ): ");
+            printf("\tNhap ten lop ( nhom lop ): ");
             scanf("%s", &k);
             strcat(ap,"    Nhom: ");
             strcat(ap,k);
@@ -133,7 +126,7 @@ int main(){
             ac= fopen(j,"r");
             if(ac == NULL)
             {
-                printf("\t                                    Error !!!");
+                printf("\tError !!!");
                 exit(1);
             }else{
                 PrLine();
@@ -143,10 +136,10 @@ int main(){
             fclose(ac);break;
 
          case 5:
-            printf("\t                                    Nhap ten mon hoc: ");
+            printf("\tNhap ten mon hoc: ");
             scanf("%s", &j);
             strcat(j,"_");
-            printf("\t                                    Nhap ten lop ( nhom lop ): ");
+            printf("\tNhap ten lop ( nhom lop ): ");
             scanf("%s",&k);
             strcpy(ap,j);
             strcat(ap,k);
@@ -159,7 +152,7 @@ int main(){
             ad= fopen(k,"w");
             if(ac == NULL||ad==NULL)
             {
-                printf("\t                                    Error !!!");
+                printf("\tError !!!");
                 exit(1);
             }else{
                 PrLine();
@@ -172,14 +165,6 @@ int main(){
         }
     if(select == 0) break;
     }
-   //PrLine();
-
-
-
-    PrLine();
-    printf("\t                                    He thong da thoat !!!");
-    TitEnd();
-    return 0;
 }
 void ReadF()
 {
@@ -191,10 +176,11 @@ void ReadF()
       }
    n--;
 }
+
 void PrLine()
 {
-    printf("\t\t");
-    for(int i = 0; i < 97; i++)
+    printf("\t");
+    for(int i = 0; i < 107; i++)
     {
         printf("-");
     }
@@ -208,86 +194,89 @@ int CheckID( long long x)
     }
     return db;
 }
+
+
+
 void Create()
 {
     int in;
     while(1){
-       //PrLine();
-       printf("\t\tNhap ma sinh vien ( nhap 0 de thoat chuc nang ): ");
+       printf("\tNhap ma sinh vien (Nhap 0 de thoat chuc nang): ");
        scanf("%lld", &ds[n].msv); if(ds[n].msv == 0) break;
        fprintf(ac, "%lld ", ds[n].msv);
-       printf("\t\tLab1:            "); scanf("%f", &ds[n].l1); fprintf(ac, "%7.1f ", ds[n].l1);
-       printf("\t\tLab2:            "); scanf("%f", &ds[n].l2); fprintf(ac, "%7.1f ", ds[n].l2);
-       printf("\t\tProgress test 1: "); scanf("%f", &ds[n].p1); fprintf(ac, "%7.1f ", ds[n].p1);
-       printf("\t\tProgress test 2: "); scanf("%f", &ds[n].p2); fprintf(ac, "%7.1f ", ds[n].p2);
-       printf("\t\tPresentation:    "); scanf("%f", &ds[n].ppt); fprintf(ac, "%7.1f ", ds[n].ppt);
-       printf("\t\tFinal Test:      "); scanf("%f", &ds[n].final); fprintf(ac, "%7.1f\n", ds[n].final);
+       printf("\tLab1:            "); scanf("%f", &ds[n].l1); fprintf(ac, "%7.1f ", ds[n].l1);
+       printf("\tLab2:            "); scanf("%f", &ds[n].l2); fprintf(ac, "%7.1f ", ds[n].l2);
+       printf("\tProgress test 1: "); scanf("%f", &ds[n].p1); fprintf(ac, "%7.1f ", ds[n].p1);
+       printf("\tProgress test 2: "); scanf("%f", &ds[n].p2); fprintf(ac, "%7.1f ", ds[n].p2);
+       printf("\tPresentation:    "); scanf("%f", &ds[n].ppt); fprintf(ac, "%7.1f ", ds[n].ppt);
+       printf("\tFinal Test:      "); scanf("%f", &ds[n].final); fprintf(ac, "%7.1f\n", ds[n].final);
+       PrLine();
     }
-   // PrLine();
-    printf("\t\tDa thoat chuc nang nhap diem !!\n");
+    printf("\tDa thoat chuc nang nhap diem !!\n");
 }
 void ViewPoint()
 {
     long long msvc;
+    int in;
     while(1){
-        //PrLine();
-        printf("\t\tNhap ma sinh vien can kiem tra ( nhap 0 de thoat chuc nang ): "); scanf("%lld", &msvc);
+        printf("\tNhap ma sinh vien can kiem tra (Nhap 0 de thoat chuc nang): "); scanf("%lld", &msvc);
         if(msvc == 0) break;
         //ham check ma sinh vien
         int pos = CheckID(msvc);
         if( pos != -1){
-            printf("\t\t*-----------------------------------------------------------------------------------------------*\n");
-            printf("\t        |  Bang diem cua SV co ma: %lld\t\t\t\t\t\t\t        |\n", msvc);
-            printf("\t\t*-----------------------------------------------------------------------------------------------*\n");
-            printf("\t        | Lab1\t| Lab2\t|   Progress test 1\t |   Progress test 2\t | Presentation\t | Final test   |\n");
-            printf("\t\t*-------*-------*------------------------*-----------------------*---------------*--------------*\n");
-            printf("\t        |  %.1f\t|  %.1f\t|         %.1f\t\t |        %.1f\t\t |      %.1f\t |   %.1f        |\n", ds[pos].l1, ds[pos].l2, ds[pos].p1, ds[pos].p2, ds[pos].ppt, ds[pos].final);
-            printf("\t\t*-------*-------*------------------------*-----------------------*---------------*--------------*\n");
-        } else printf("\t\tKhong tim thay !!\n");
+            printf("\t*---------------------------------------------------------------------------------------------------------*\n");
+            printf("        |  Bang diem cua SV co ma: %lld    \t\t\t\t\t\t                  |\n",msvc);
+            printf("\t*---------------------------------------------------------------------------------------------------------*\n");
+            printf("        | Lab1\t| Lab2\t|   Progress test 1\t |   Progress test 2\t | Presentation\t |     Final test         |\n");
+            printf("\t*---------------------------------------------------------------------------------------------------------*\n");
+            printf("        |  %.1f\t|  %.1f\t|         %.1f\t\t |        %.1f\t\t |      %.1f\t |       %.1f              |\n", ds[pos].l1, ds[pos].l2, ds[pos].p1, ds[pos].p2, ds[pos].ppt, ds[pos].final);
+            printf("\t*---------------------------------------------------------------------------------------------------------*\n");
+        } else printf("\tKhong tim thay !!\n");
         }
         PrLine();
-        printf("\t\tDa thoat chuc nang xem diem !!\n");
+        printf("\tDa thoat chuc nang xem diem !!\n");
 }
 void FixPoint()
 {
-    int select;//bien select de chon cot diem can sua
+    int select, in;//bien abc de chon cot diem can sua,bien k de khoi dong
     long long msvc;
     while(1){
-        //PrLine();
-        printf("\t\tNhap ma sinh vien can kiem tra ( nhap 0 de thoat chuc nang ): "); scanf("%lld", &msvc);
+        printf("\tNhap ma sinh vien can kiem tra (Nhap 0 de thoat chuc nang): "); scanf("%lld", &msvc);
         if(msvc == 0) break;
         //ham check ma sinh vien
         int pos = CheckID(msvc);
         if(pos != -1){
-            printf("\t\tChon cot diem can chinh sua:\n\t\t1. Lab1\n\t\t2. Lab2\n\t\t3. Progress test 1\n\t\t4. Progress test 2\n\t\t5. Presentation\n\t\t6. Final Test\n\t\tMoi ban chon: ");
+            PrLine();
+            printf("\tChon cot diem can chinh sua:\n\t1. Lab1\n\t2. Lab2\n\t3. Progress test 1\n\t4. Progress test 2\n\t5. Presentation\n\t6. Final Test\n\t==> Moi ban chon: ");
             scanf("\t\t%d", &select);
             switch (select){
                 case 1:
-                    printf("\t\tNhap cot diem Lab1 moi: ");
+                    printf("\tNhap cot diem Lab1 moi: ");
                     scanf("%f",&ds[pos].l1);break;
 
                 case 2:
-                    printf("\t\tNhap cot diem Lab2 moi: ");
+                    printf("\tNhap cot diem Lab2 moi: ");
                     scanf("%f",&ds[pos].l2);break;
 
                 case 3:
-                    printf("\t\tNhap cot diem Progress Test 1 moi: ");
+                    printf("\tNhap cot diem Progress Test 1 moi: ");
                     scanf("%f",&ds[pos].p1);break;
 
                 case 4:
-                    printf("\t\tNhap cot diem Progress Test 2 moi: ");
+                    printf("\tNhap cot diem Progress Test 2 moi: ");
                     scanf("%f",&ds[pos].p2);break;
 
                 case 5:
-                    printf("\t\tNhap cot diem Presentation moi: ");
+                    printf("\tNhap cot diem Presentation moi: ");
                     scanf("%f",&ds[pos].ppt);break;
 
                 case 6:
-                    printf("\t\tNhap cot diem Final moi: ");
+                    printf("\tNhap cot diem Final moi: ");
                     scanf("%f",&ds[pos].final);break;
             }
 
-        }else printf("\t\tKhong tim thay !!\n");
+        }else printf("\tKhong tim thay !!\n");
+        PrLine();
    }
 
    fclose(ac);
@@ -302,21 +291,22 @@ void FixPoint()
        fprintf(ac, "%7.1f\n", ds[i].final);
    }
    PrLine();
-   printf("\t\tDa thoat chuc nang sua diem !!\n");
+   printf("\tDa thoat chuc nang sua diem !!\n");
 }
 
 void PrList()
 {
-    printf("\t\t*----------------------------------------------------------------------------------------------------*\n");
-    printf("\t        |  Bang diem cua lop: %s    \t\t\t\t\t\t               |\n",ap);
-    printf("\t\t*----------------------------------------------------------------------------------------------------*\n");
-    printf("\t        | STT | Ma SV     | Lab1  | Lab2   | Progress test 1 | Progress test 2   | Presentation  | Final test  |\n");
+    printf("\t*---------------------------------------------------------------------------------------------------------*\n");
+    printf("        |  Bang diem cua lop: %s    \t\t\t\t\t                  |\n",ap);
+    printf("\t*---------------------------------------------------------------------------------------------------------*\n");
+    printf("        | STT | Ma SV     | Lab1  | Lab2   | Progress test 1 | Progress test 2   | Presentation  | Final test     |\n");
     for( int i = 0; i < n; i++)
     {
-        printf("\t\t*-----*-----------*-------*-------*------------------*-------------------*---------------*------------*\n");
-        printf("\t        | %d   | %lld | %4.1f  |  %4.1f  |      %4.1f       |      %4.1f         |      %4.1f     |     %4.1f    |\n",
+        printf("\t*-----*-----------*-------*--------*-----------------*-------------------*---------------*----------------*\n");
+        printf("        | %d   | %lld | %4.1f  |  %4.1f  |      %4.1f       |      %4.1f         |      %4.1f     |     %4.1f       |\n",
                             i+1, ds[i].msv, ds[i].l1, ds[i].l2, ds[i].p1, ds[i].p2, ds[i].ppt, ds[i].final);
     }
+    printf("\t*---------------------------------------------------------------------------------------------------------*\n");
 
 }
 void ArrList()
@@ -350,21 +340,33 @@ void ArrList()
          }
       }
    }
-   for(int i=0;i<n;i++){
+   for(int i = 0;i < n;i++){
       fprintf(ad,"%9lld %5.1f %5.1f %5.1f %5.1f %5.1f %5.1f %6.2f %3s\n",ds[i].msv,ds[i].l1,ds[i].l2,ds[i].p1,ds[i].p2,ds[i].ppt,ds[i].final,ds[i].TB,ds[i].diemchu);
    }
-   printf("\t\tDa sap xep xong hay xem tai file: %s\n",k);
-   PrLine;
+   printf("\tDa sap xep xong hay xem tai file: %s\n",k);
+   PrLine();
 }
 void delay(int number_of_seconds)
 {
-    // Converting time into milli_seconds
     int milli_seconds = 1000 * number_of_seconds;
-
-    // Storing start time
     clock_t start_time = clock();
-
-    // looping till required time is not achieved
     while (clock() < start_time + milli_seconds);
+}
+void TitStart()
+{
+    printf("\t***********************************************************************************************************\n");
+    printf("\t|                                PBL1: HE THONG QUAN LY DIEM CUA SINH VIEN                                |\n");
+    printf("\t|                             Nguoi thuc hien: Le Van Tien Dat & La Dang Huy                              |\n");
+    printf("\t|                                Giao vien huong dan: Tran Ho Thuy Tien                                   |\n");
+    printf("\t***********************************************************************************************************\n");
+}
+
+void TitEnd()
+{
+    printf("\n\t***********************************************************************************************************\n");
+    printf("\t|                        ^-^  Cam on moi nguoi da su dung he thong cua chung toi ^-^                      |\n");
+    printf("\t*                                  Chuc moi nguoi mot ngay moi tot lanh !!!                               *\n");
+    printf("\t|                                -.-.-.-.-.-.-.-.-.-.-.-..-.-.-.-.-.-.-.-.-.-                             |\n");
+    printf("\t***********************************************************************************************************\n");
 }
 
