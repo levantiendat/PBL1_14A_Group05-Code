@@ -225,7 +225,7 @@ void ViewPoint()
         int pos = CheckID(msvc);
         if( pos != -1){
             printf("\t*---------------------------------------------------------------------------------------------------------*\n");
-            printf("        |  Bang diem cua SV co ma: %lld    \t\t\t\t\t\t\t                  |\n",msvc);
+            printf("        |  Bang diem cua SV co ma: %9lld    \t\t\t\t\t\t                  |\n",msvc);
             printf("\t*---------------------------------------------------------------------------------------------------------*\n");
             printf("        | Lab1\t| Lab2\t|   Progress test 1\t |   Progress test 2\t | Presentation\t |     Final test         |\n");
             printf("\t*---------------------------------------------------------------------------------------------------------*\n");
