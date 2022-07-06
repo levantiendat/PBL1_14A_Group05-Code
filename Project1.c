@@ -357,7 +357,7 @@ void TitStart()
     printf("\t***********************************************************************************************************\n");
     printf("\t|                                PBL1: HE THONG QUAN LY DIEM CUA SINH VIEN                                |\n");
     printf("\t|                             Nguoi thuc hien: Le Van Tien Dat & La Dang Huy                              |\n");
-    printf("\t|                                Giao vien huong dan: Tran Ho Thuy Tien                                   |\n");
+    printf("\t|                                Giang vien huong dan: Tran Ho Thuy Tien                                   |\n");
     printf("\t***********************************************************************************************************\n");
 }
 
