@@ -297,7 +297,7 @@ void FixPoint()
 void PrList()
 {
     printf("\t*---------------------------------------------------------------------------------------------------------*\n");
-    printf("        |  Bang diem cua lop: %18s    \t\t\t\t\t          |\n",ap);
+    printf("          Bang diem cua lop: %18s    \t\t\t\t\t          \n",ap);
     printf("\t*---------------------------------------------------------------------------------------------------------*\n");
     printf("        | STT  | Ma SV     | Lab1  | Lab2   | Progress test 1 | Progress test 2   | Presentation  | Final test    |\n");
     for( int i = 0; i < n; i++)
