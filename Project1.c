@@ -282,7 +282,7 @@ void FixPoint()
    fclose(ac);
    ac = fopen(j, "w");
    for(int i = 0;i < n; i++){
-       fprintf(ac, "%   lld ", ds[i].msv);
+       fprintf(ac, "%   9lld ", ds[i].msv);
        fprintf(ac, "%7.1f ", ds[i].l1);
        fprintf(ac, "%7.1f ", ds[i].l2);
        fprintf(ac, "%7.1f ", ds[i].p1);
